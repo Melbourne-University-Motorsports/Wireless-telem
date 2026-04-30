@@ -1,0 +1,79 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: BMS BMS
+
+
+BO_ 16 MSGID_0X10: 8 BMS
+ SG_ Pack_Inst_Voltage : 7|16@0+ (0.1,0) [0|0] "Volts"  BMS
+ SG_ Pack_Open_Voltage : 23|16@0+ (0.1,0) [0|0] "Volts"  BMS
+ SG_ Pack_Current : 39|16@0+ (0.1,0) [0|0] "Amps"  BMS
+ SG_ Pack_SOC : 55|8@0+ (0.5,0) [0|0] "Percent"  BMS
+
+BO_ 32 MSGID_0X20: 8 BMS
+ SG_ Pack_DCL : 7|16@0+ (1.0,0) [0|0] "Amps"  BMS
+ SG_ Pack_CCL : 23|8@0+ (1.0,0) [0|0] "Amps"  BMS
+ SG_ Pack_Resistance : 39|16@0+ (0.001,0) [0|0] "Ohms"  BMS
+
+BO_ 48 MSGID_0X30: 8 BMS
+ SG_ High_Cell_Voltage : 7|16@0+ (1.0E-4,0) [0|0] "Volts"  BMS
+ SG_ Low_Cell_Voltage : 23|16@0+ (1.0E-4,0) [0|0] "Volts"  BMS
+ SG_ Input_Supply_Voltage : 39|16@0+ (0.1,0) [0|0] "Volts"  BMS
+ SG_ Current_Limits_Status : 55|16@0+ (1.0,0) [0|0] ""  BMS
+
+BO_ 64 MSGID_0X40: 8 BMS
+ SG_ High_Cell_Voltage_ID : 7|8@0+ (1.0,0) [0|0] "ID"  BMS
+ SG_ Low_Cell_Voltage_ID : 23|8@0+ (1.0,0) [0|0] "ID"  BMS
+
+BO_ 1560 MSGID_0X618: 7 BMS
+ SG_ Charger_Safety : 7|1@1+ (1.0,0) [0|1] ""  BMS
+ SG_ Constant_Value : 15|16@0+ (1.0,500) [0|0] ""  BMS
+ SG_ Maximum_Cell_Voltage : 31|16@0+ (9.25925925925926E-4,0) [0|0] "Volts"  BMS
+ SG_ Pack_CCL : 47|16@0+ (0.1,0) [0|0] "Amps"  BMS
+
+BO_ 54 MSGID_0X36_CELLBCAST: 8 BMS
+ SG_ CellId : 7|8@0+ (1,0) [0|0] "#" BMS
+ SG_ CellVoltage : 15|16@0+ (0.0001,0) [0|0] "Volts" BMS
+ SG_ CellResistance : 30|15@0+ (0.01,0) [0|0] "mOhms" BMS
+ SG_ CellOpenVoltage : 47|16@0+ (0.0001,0) [0|0] "Volts" BMS
+ SG_ Checksum : 63|8@0+ (1,0) [0|0] "" BMS
+ SG_ CellBalancing : 31|1@1+ (1,0) [0|0] "" BMS
+CM_ BO_ 16 "This ID Transmits at 8 ms.";
+CM_ BO_ 32 "This ID Transmits at 104 ms.";
+CM_ BO_ 48 "This ID Transmits at 8 ms.";
+CM_ BO_ 64 "This ID Transmits at 8 ms.";
+CM_ BO_ 1560 "This ID Transmits at 104 ms.";
+CM_ BO_ 54 "This ID Transmits at 4 ms.";
+CM_ SG_ 54 Checksum "Value = (0x36 + 8 + byte0 + byte1 + ... + byte6) & 0xFF";
