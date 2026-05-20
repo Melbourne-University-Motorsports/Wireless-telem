@@ -4,12 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = [
-    "asammdf>=8.8.9",
-    "pyserial>=3.5",
-    "python-can>=4.6.1",
-    "pyzmq>=27.1.0",
-]
+dependencies = []
 
 [tool.uv.workspace]
 members = [
@@ -17,6 +12,8 @@ members = [
     "mdf4-logger",
     "rf-sender",
     "shared",
+    "broker",
+    "can-simulator",
 ]
 
 [dependency-groups]

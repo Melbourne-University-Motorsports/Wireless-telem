@@ -1,5 +1,5 @@
 def main():
-    print("Hello from mdf4-logger!")
+    print("Hello from can-simulator!")
 
 
 if __name__ == "__main__":

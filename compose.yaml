@@ -1,0 +1,40 @@
+services:
+
+  can-reader:
+    build: ./can-reader
+    depends_on: [broker]
+    devices:
+      - /dev/can0:/dev/can0
+      - /dev/can1:/dev/can1
+    volumes:
+      - ./dbc:/app/dbc:ro
+    environment:
+      - CRITICAL_CAN_INTERFACE: can0
+      - NONCRITICAL_CAN_INTERFACE: can1
+      - DBC_PATH: /app/dbc/car/dbc
+    restart: always
+
+  can-simulator:
+    build: ./can-simulator
+    profiles: ["dev"]
+    depends_on: [broker]
+    volumes:
+      - ./dbc:/app/dbc:ro
+    environment:
+      - CRITICAL_CAN_INTERFACE: can0
+      - NONCRITICAL_CAN_INTERFACE: can1
+      - DBC_PATH: /app/dbc/car.dbc
+    restart: always
+
+  broker:
+    build: ./broker
+    restart: always
+
+  sd-logger:
+    build: ./sd-logger
+    depends_on: [broker]
+    environment:
+      LOG_DIR: /logs
+    volumes:
+      - /mnt/logs:/logs
+    restart: always
