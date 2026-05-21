@@ -9,9 +9,9 @@ services:
     volumes:
       - ./dbc:/app/dbc:ro
     environment:
-      - CRITICAL_CAN_INTERFACE: can0
-      - NONCRITICAL_CAN_INTERFACE: can1
-      - DBC_PATH: /app/dbc/car/dbc
+      - CRITICAL_CAN_INTERFACE=can0
+      - NONCRITICAL_CAN_INTERFACE=can1
+      - DBC_PATH=/app/dbc/car/dbc
     restart: always
 
   can-simulator:
@@ -21,9 +21,9 @@ services:
     volumes:
       - ./dbc:/app/dbc:ro
     environment:
-      - CRITICAL_CAN_INTERFACE: can0
-      - NONCRITICAL_CAN_INTERFACE: can1
-      - DBC_PATH: /app/dbc/car.dbc
+      - CRITICAL_CAN_INTERFACE=can0
+      - NONCRITICAL_CAN_INTERFACE=can1
+      - DBC_PATH=/app/dbc/car/dbc
     restart: always
 
   broker:

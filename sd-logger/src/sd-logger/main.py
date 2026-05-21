@@ -37,6 +37,7 @@ def mdf_writer_thread(mdf: MDF, units: dict[str, str]):
 async def receive_loop(subscriber):
     while True:
         topic, timestamp_us, value = await subscriber.recv_multipart()
+        print(f"{topic}: {value} {timestamp_us}")
         write_queue.put((topic, timestamp_us, value))
 
 

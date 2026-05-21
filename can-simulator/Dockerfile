@@ -10,4 +10,4 @@ COPY source src/ ./src
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-CMD ["python", "-m", "sd-logger.main"]
+CMD ["python", "-m", "can-simulator.main"]
