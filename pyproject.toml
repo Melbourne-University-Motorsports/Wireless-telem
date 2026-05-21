@@ -9,7 +9,7 @@ dependencies = []
 [tool.uv.workspace]
 members = [
     "can-reader",
-    "mdf4-logger",
+    "sd-logger",
     "rf-sender",
     "shared",
     "broker",

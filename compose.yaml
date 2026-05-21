@@ -1,40 +1,49 @@
 services:
 
   can-reader:
-    build: ./can-reader
+    build:
+      context: .
+      dockerfile: can-reader/Dockerfile
     depends_on: [broker]
-    devices:
-      - /dev/can0:/dev/can0
-      - /dev/can1:/dev/can1
+    devices: []
     volumes:
       - ./dbc:/app/dbc:ro
     environment:
       - CRITICAL_CAN_INTERFACE=can0
       - NONCRITICAL_CAN_INTERFACE=can1
-      - DBC_PATH=/app/dbc/car/dbc
+      - DBC_PATH=/app/dbc/CAN_2024.dbc
     restart: always
 
   can-simulator:
-    build: ./can-simulator
-    profiles: ["dev"]
+    build:
+      context: .
+      dockerfile: can-simulator/Dockerfile
+    profiles: [dev]
     depends_on: [broker]
     volumes:
       - ./dbc:/app/dbc:ro
     environment:
       - CRITICAL_CAN_INTERFACE=can0
       - NONCRITICAL_CAN_INTERFACE=can1
-      - DBC_PATH=/app/dbc/car/dbc
+      - DBC_PATH=/app/dbc/CAN_2024.dbc
+
     restart: always
 
   broker:
-    build: ./broker
+    build:
+      context: .
+      dockerfile: broker/Dockerfile
     restart: always
 
   sd-logger:
-    build: ./sd-logger
+    build:
+      context: .
+      dockerfile: sd-logger/Dockerfile
     depends_on: [broker]
     environment:
-      LOG_DIR: /logs
+      - LOG_DIR=/logs
+      - DBC_PATH=/app/dbc/CAN_2024.dbc
     volumes:
+      - ./dbc:/app/dbc:ro
       - /mnt/logs:/logs
     restart: always

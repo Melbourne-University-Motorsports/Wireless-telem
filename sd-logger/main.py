@@ -5,13 +5,15 @@ import signal
 import sys
 import threading
 
+import cantools
 import numpy as np
 import zmq
+import zmq.asyncio
 from asammdf import MDF, Signal
 
 dbc_file_path = os.environ["DBC_PATH"]
 log_dir = os.environ["LOG_DIR"]
-
+broker_host = os.environ.get("BROKER_HOST", "broker")
 write_queue = queue.Queue()
 
 
@@ -40,34 +42,29 @@ async def receive_loop(subscriber):
         print(f"{topic}: {value} {timestamp_us}")
         write_queue.put((topic, timestamp_us, value))
 
-
-def shutdown(sig, frame):
-    write_queue.put(None)  # Stop writer thread
-    mdf.save(dst=log_dir, overwrite=True)
-    sys.exit(0)
-
-
 def main():
     dbc = cantools.database.load_file(dbc_file_path)
     units = {
-        sig.name: sig.unit
-        for msg in dbc.messages
-        for sig in msg.signal_name
-        if sig.unit
+        sig.name: sig.unit for msg in dbc.messages for sig in msg.signals if sig.unit
     }
 
     with MDF(version="4.10") as mdf4:
 
+        def shutdown(sig, frame):
+            write_queue.put(None)
+            mdf4.save(dst=log_dir, overwrite=True)
+            sys.exit(0)
+
         signal.signal(signal.SIGTERM, shutdown)
         signal.signal(signal.SIGINT, shutdown)
 
-        t = threading.Thread(target=writer_thread, args=(mdf, units), daemon=True)
+        t = threading.Thread(target=mdf_writer_thread, args=(mdf4, units), daemon=True)
         t.start()
 
         with zmq.asyncio.Context() as ctx:
             with ctx.socket(zmq.SUB) as subscriber:
 
-                subscriber.connect("tcp://broker:5560")
+                subscriber.connect(f"tcp://{broker_host}:5560")
                 subscriber.setsockopt(zmq.SUBSCRIBE, b"")
                 asyncio.run(receive_loop(subscriber))
 

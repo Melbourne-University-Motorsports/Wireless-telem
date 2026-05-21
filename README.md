@@ -50,3 +50,17 @@ If on Unix system (MacOS / Linux) I recommend using plain `rsync` for quick iter
 `cd Wireless-telem`
 Then run rsync command:
 `rsync -avz --exclude-from='.gitignore' --exclude='.git' . mur@mur-wireless-telemetry:~/Wireless-telem`
+
+
+## Developent without a Raspi 
+Use orbstack as a linux vm. build with `docker compose --profile dev build --no-cache` run with `docker compose --profile dev up`. enable vcan0 with:
+```bash
+docker run --rm \
+    --network host \
+    --privileged \
+    alpine sh -c '
+      apk add --no-cache iproute2 &&
+      modprobe vcan || true &&
+      ip link add dev vcan0 type vcan &&
+      ip link set up vcan0
+    '```

@@ -4,10 +4,14 @@ import os
 import can
 import cantools
 import zmq
+import zmq.asyncio
 
 dbc_file_path = os.environ["DBC_PATH"]
 critical_can = os.environ["CRITICAL_CAN_INTERFACE"]
 noncritical_can = os.environ["NONCRITICAL_CAN_INTERFACE"]
+
+# in compose.override.yaml set BROKER_HOST=127.0.0.1 for dev without raspi
+broker_host = os.environ.get("BROKER_HOST", "broker")
 
 
 async def process_bus(
@@ -23,7 +27,7 @@ async def process_bus(
             for signal_name, value in decoded.items():
                 topic = f"{topic_prefix}.{signal_name}".encode()
                 publisher.send_multipart(
-                    [topic, str(timestamp).encode(), str(value).encode()]
+                    [topic, str(timestamp_us).encode(), str(value).encode()]
                 )
         except KeyError:
             pass
@@ -34,8 +38,8 @@ async def main() -> None:
         with ctx.socket(zmq.PUB) as publisher:
 
             dbc = cantools.database.load_file(dbc_file_path)
-            publisher.connect("tcp://broker:5555")
-            loop = asyncio.get_event_loop()
+            publisher.connect(f"tcp://{broker_host}:5555")
+            loop = asyncio.get_running_loop()
 
             with (
                 can.interface.Bus(
@@ -59,12 +63,12 @@ async def main() -> None:
                 ):
 
                     await asyncio.gather(
-                        asyncio.create_task(
+                        
                             process_bus(critical_reader, "critical.can", publisher, dbc)
-                        ),
-                        asyncio.create_task(
+                        ,
+                        
                             process_bus(noncritical_reader, "log.can", publisher, dbc)
-                        ),
+                        ,
                     )
 
 

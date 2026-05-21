@@ -1,13 +1,10 @@
-FROM python:3.12-alpine
-COPY --from=ghcr.io/astral-sh/uv-latest /uv /bin/uv
-
+FROM python:3.12-slim
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 WORKDIR /app
-
-COPY pyproject.toml uv lock ./
-RUN uv sync --frozen --no-dev --no-install-project
-
-COPY source src/ ./src
-
+COPY pyproject.toml uv.lock ./
+COPY rf-sender/pyproject.toml ./rf-sender/
+RUN uv sync --frozen --no-dev --package rf-sender
+COPY rf-sender/main.py ./main.py
 ENV PATH="/app/.venv/bin:$PATH"
+CMD ["python", "main.py"]
 
-CMD ["python", "-m", "rf-sender.main"]
