@@ -8,5 +8,6 @@ dependencies = [
     "asammdf>=8.8.9",
     "cantools>=41.3.1",
     "numpy>=2.4.6",
+    "pathlib>=1.0.1",
     "pyzmq>=27.1.0",
 ]

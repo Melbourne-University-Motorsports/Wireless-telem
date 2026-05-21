@@ -1,9 +1,11 @@
 import asyncio
+import datetime
 import os
 import queue
 import signal
 import sys
 import threading
+from pathlib import Path
 
 import cantools
 import numpy as np
@@ -12,7 +14,7 @@ import zmq.asyncio
 from asammdf import MDF, Signal
 
 dbc_file_path = os.environ["DBC_PATH"]
-log_dir = os.environ["LOG_DIR"]
+log_dir = Path(os.environ["LOG_DIR"], datetime.now().strftime("%Y%m%d_%H%M%S.mf4"))
 broker_host = os.environ.get("BROKER_HOST", "broker")
 write_queue = queue.Queue()
 
@@ -39,7 +41,6 @@ def mdf_writer_thread(mdf: MDF, units: dict[str, str]):
 async def receive_loop(subscriber):
     while True:
         topic, timestamp_us, value = await subscriber.recv_multipart()
-        print(f"{topic}: {value} {timestamp_us}")
         write_queue.put((topic, timestamp_us, value))
 
 def main():
@@ -52,6 +53,7 @@ def main():
 
         def shutdown(sig, frame):
             write_queue.put(None)
+            t.join()
             mdf4.save(dst=log_dir, overwrite=True)
             sys.exit(0)
 
