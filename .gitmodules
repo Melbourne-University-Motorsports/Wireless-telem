@@ -1,0 +1,6 @@
+[submodule "bms_telemetry"]
+	path = bms_telemetry
+	url = https://github.com/Melbourne-University-Motorsports/bms_telemetry
+[submodule "bms"]
+	path = bms
+	url = https://github.com/Melbourne-University-Motorsports/bms_telemetry
