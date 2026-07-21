@@ -1,0 +1,98 @@
+VERSION "MUR_Telemetry_CAN_v1.0"
+
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: DASH PDU SBG TELEMETRY
+
+BO_ 512 Dashboard_Dynamics: 8 DASH
+ SG_ DASH_SteeringAngle : 0|16@1- (0.1,0) [-1800|1800] "deg" TELEMETRY
+ SG_ DASH_ShockPotFrontLeft : 16|16@1+ (0.1,0) [0|500] "mm" TELEMETRY
+ SG_ DASH_ShockPotFrontRight : 32|16@1+ (0.1,0) [0|500] "mm" TELEMETRY
+ SG_ DASH_HeartbeatCounter : 48|8@1+ (1,0) [0|255] "" TELEMETRY
+
+BO_ 513 Dashboard_Inputs: 4 DASH
+ SG_ DASH_ButtonStates : 0|16@1+ (1,0) [0|65535] "" TELEMETRY
+ SG_ DASH_RotarySwitch : 16|8@1+ (1,0) [0|15] "" TELEMETRY
+
+BO_ 514 Dashboard_Environment: 4 DASH
+ SG_ DASH_WindSpeed : 0|16@1+ (0.1,0) [0|6553.5] "m/s" TELEMETRY
+
+BO_ 528 PDU_Status: 4 PDU
+ SG_ PDU_PumpState : 0|1@1+ (1,0) [0|1] "" TELEMETRY,ECU
+ SG_ PDU_FanState : 1|1@1+ (1,0) [0|1] "" TELEMETRY,ECU
+ SG_ PDU_HeartbeatCounter : 8|8@1+ (1,0) [0|255] "" TELEMETRY
+
+BO_ 560 Telemetry_System: 8 TELEMETRY
+ SG_ TELEM_SystemCPULoad : 0|8@1+ (1,0) [0|100] "%" DASH
+ SG_ TELEM_SystemMemoryUsage : 8|8@1+ (1,0) [0|100] "%" DASH
+ SG_ TELEM_SystemDiskUsage : 16|8@1+ (1,0) [0|100] "%" DASH
+ SG_ TELEM_PiTemperature : 24|16@1- (0.1,0) [-3276.8|3276.7] "degC" DASH
+
+BO_ 561 Telemetry_LVBattery: 4 TELEMETRY
+ SG_ TELEM_LVBatteryVoltage : 0|16@1+ (0.01,0) [0|655.35] "V" DASH,ECU
+ SG_ TELEM_LVBatteryCurrent : 16|16@1- (0.1,0) [-3276.8|3276.7] "A" DASH,ECU
+
+CM_ BU_ DASH "Dashboard Sensor Node - steering, shock pots, driver buttons, wind speed";
+CM_ BU_ PDU "Power Distribution Unit - pump/fan state, no command messages per design brief (commands originate from ECU if implemented)";
+CM_ BU_ SBG "2x SBG Eclipse-N GPS/INS units. Vendor-supplied DBC required - NOT included here. CAN ID block 0x220-0x22F reserved for SBG traffic (one unit must be remapped in SBG software since both units share this bus). No signals defined in this file to avoid misrepresenting the vendor protocol; merge the vendor SBG DBC (remapped copy) alongside this file once received.";
+CM_ BU_ TELEMETRY "Telemetry Unit (Raspberry Pi) - silently captures all Telemetry CAN traffic, also broadcasts system health + LV battery data";
+CM_ BO_ 512 "Dashboard steering/suspension + heartbeat. Transmit rate 100 Hz (FAST).";
+CM_ SG_ 512 DASH_SteeringAngle "Signed to allow left/right steering deflection.";
+CM_ BO_ 513 "Dashboard driver button states + rotary mode switch. Transmit rate 20 Hz.";
+CM_ SG_ 513 DASH_ButtonStates "Bit-per-button. Exact button map TBD - to be locked down with driver interface design per Telemetry_CAN.md notes.";
+CM_ SG_ 513 DASH_RotarySwitch "Rotary switch position index (0-15). ASSUMPTION - confirm number of switch positions.";
+CM_ BO_ 514 "Dashboard wind speed sensor. Transmit rate 10 Hz (MEDIUM).";
+CM_ BO_ 528 "PDU pump/fan on-off state + heartbeat. Transmit rate 10 Hz (SLOW). Byte 2 reserved for future PDU_FanSpeed once speed control is implemented (see Telemetry_CAN.md).";
+CM_ BO_ 560 "Telemetry Pi system health (CPU/mem/disk/temp), broadcast for dashboard display. Transmit rate 5 Hz.";
+CM_ BO_ 561 "Telemetry Pi LV battery voltage/current monitoring. Transmit rate 2 Hz (SLOW).";
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 100000;
+BA_DEF_ BO_ "GenMsgSendType" ENUM "Cyclic","OnChange","Event";
+BA_DEF_ "BusType" STRING ;
+BA_DEF_DEF_ "GenMsgCycleTime" 0;
+BA_DEF_DEF_ "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_ "BusType" "CAN";
+BA_ "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 512 10;
+BA_ "GenMsgCycleTime" BO_ 513 50;
+BA_ "GenMsgCycleTime" BO_ 514 100;
+BA_ "GenMsgCycleTime" BO_ 528 100;
+BA_ "GenMsgCycleTime" BO_ 560 200;
+BA_ "GenMsgCycleTime" BO_ 561 500;
+BA_ "GenMsgSendType" BO_ 512 0;
+BA_ "GenMsgSendType" BO_ 513 0;
+BA_ "GenMsgSendType" BO_ 514 0;
+BA_ "GenMsgSendType" BO_ 528 0;
+BA_ "GenMsgSendType" BO_ 560 0;
+BA_ "GenMsgSendType" BO_ 561 0;

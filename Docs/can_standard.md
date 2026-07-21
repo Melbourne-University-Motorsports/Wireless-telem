@@ -83,40 +83,29 @@ The Telemetry CAN contains non-critical telemetry, logging, dashboard, and drive
 ------------------------------------------------------------------------
 
 # 2. CAN ID Structure
+## CAN ID Allocation
 
-## Standard
+The team uses standard 11-bit CAN identifiers.
 
--   11-bit CAN IDs
--   Structured CAN ID allocation
+CAN IDs are allocated in sequential ranges based on the originating node. This simplifies debugging, DBC management, future expansion and CAN trace analysis.
 
-## Recommended Structure
+Lower numerical CAN IDs retain higher arbitration priority as defined by the CAN protocol.
 
-``` text
-[ Priority | Node ID | Message Index ]
-```
+### Team CAN ID Allocation
 
-### Example Layout
+| Node | CAN ID Range |
+|------|--------------|
+| Pedalbox Sensor Node | 0x100 - 0x10F |
+| TTCS Sensor Node | 0x110 - 0x11F |
+| ECU | 0x120 - 0x12F |
+| BMS | 0x130 - 0x13F |
+| Telemetry Unit (Raspberry Pi) | 0x140 - 0x14F |
+| Dashboard Sensor Node | 0x200 - 0x20F |
+| Power Distribution Unit | 0x210 - 0x21F |
 
-``` text
-Bits 10-8 : Priority
-Bits 7-4  : Node ID
-Bits 3-0  : Message Index
-```
+### Vendor Devices
 
-## Priority Rules
-
-Lower CAN IDs have higher arbitration priority.
-
-### Suggested Priority Levels
-
-| Priority | Use Case                  |
-|----------|---------------------------|
-| 0        | Safety-critical shutdowns |
-| 1        | Torque commands           |
-| 2        | Pedal/brake signals       |
-| 3        | BMS and inverter status   |
-| 4        | Telemetry                 |
-| 5+       | Diagnostics/debug         |
+Vendor devices (such as the Cascadia Motion PM100DZ inverter) retain their manufacturer-defined CAN identifiers.
 
 ------------------------------------------------------------------------
 
@@ -147,7 +136,24 @@ PEDAL_BrakePressureFront
 
 ------------------------------------------------------------------------
 
-# 4. Standard Units
+# 4. Message Packing
+
+Signals would be grouped into logical CAN messages where possible.
+
+Example:
+
+Pedal_Status
+
+- Pedal Position 1
+- Pedal Position 2
+- Brake Pressure 1
+- Brake Pressure 2
+
+should be transmitted as a single CAN message rather than four separate messages.
+
+------------------------------------------------------------------------
+
+# 5. Standard Units
 
 | Quantity    | Standard Unit |
 |-------------|---------------|
@@ -163,7 +169,7 @@ PEDAL_BrakePressureFront
 
 ------------------------------------------------------------------------
 
-# 5. Signal Formatting Rules
+# 6. Signal Formatting Rules
 
 ## Signedness
 
@@ -185,7 +191,7 @@ Scaling should be explicitly defined in the DBC.
 
 ------------------------------------------------------------------------
 
-# 6. Logging Frequency Categories
+# 7. Logging Frequency Categories
 
 ## FAST (100-250 Hz)
 
@@ -239,7 +245,22 @@ Examples:
 
 ------------------------------------------------------------------------
 
-# 7. Fault Handling and Heartbeats
+# Vendor CAN Messages
+
+Some off-the-shelf components broadcast CAN messages at manufacturer-defined polling rates.
+
+These rates should be treated as authoritative unless configurable through vendor software.
+
+Examples include:
+
+- Cascadia Motion PM100DZ
+- Orion BMS (current vehicle)
+
+When replacing vendor hardware, a new DBC file should be created describing the team's CAN implementation.
+
+------------------------------------------------------------------------
+
+# 8. Fault Handling and Heartbeats
 
 ## Fault Encoding
 
@@ -263,32 +284,65 @@ If heartbeat messages stop:
 
 ------------------------------------------------------------------------
 
-# 8. DBC Management Workflow
+# 9. DBC Management Workflow
 
 ## Repository Structure
 
 ``` text
-/dbc
-    /vendor
-    /team
+dbc/
+    vendor/
+        PM100DZ.dbc
+        Orion_BMS.dbc
+
+    team/
+        control_can.dbc
+        telemetry_can.dbc
+        ENNOID_BMS.dbc
 ```
 
-## Vendor DBC Files
+# 10. Team DBC file contents
 
-Vendor DBCs should:
+## control_can.dbc 
+Pedal_Status
+Pedal_Status2
 
--   Remain read-only
--   Never be directly modified
--   Be stored separately from team DBCs
+TTCS_Status
+TTCS_IMD
 
-## Team DBC Files
+ECU_Control
+ECU_Cooling
+ECU_Faults
 
-Team DBCs contain:
+Telemetry_Heartbeat
 
--   Custom signals
--   Remapped IDs
--   Team-specific telemetry
+ENNOID messages (consumed)
 
-## Storage
+## telemetry_can.dbc
+Dashboard_Status
 
-All DBC files should be version-controlled in Git until Azure cloud database is created.
+Dashboard_Suspension
+
+Dashboard_Wind
+
+PDU_Status
+
+Telemetry_Status
+
+Telemetry_LVBattery
+
+Telemetry_Heartbeat
+
+SBG_Remapped (placeholder)
+
+Future messages
+
+## ENNOID_BMS.dbc
+BMS_Status
+
+BMS_Cells
+
+BMS_Temperatures
+
+BMS_Faults
+
+BMS_Heartbeat
