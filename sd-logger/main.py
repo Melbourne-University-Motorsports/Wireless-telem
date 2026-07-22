@@ -13,11 +13,11 @@ import zmq
 import zmq.asyncio
 from asammdf import MDF, Signal
 
-dbc_file_path = os.environ["DBC_PATH"]
-log_dir = Path(os.environ["LOG_DIR"], datetime.now().strftime("%Y%m%d_%H%M%S.mf4"))
-broker_host = os.environ.get("BROKER_HOST", "broker")
-write_queue = queue.Queue()
+DBC_FILE_PATH = os.environ["DBC_PATH"]
+LOG_DIR = Path(os.environ["LOG_DIR"], datetime.now().strftime("%Y%m%d_%H%M%S.mf4"))
+BROKER_HOST = os.environ.get("BROKER_HOST", "broker")
 
+write_queue = queue.Queue()
 
 def mdf_writer_thread(mdf: MDF, units: dict[str, str]):
     """Dedicated thread to write queue to MDF4"""
@@ -44,7 +44,7 @@ async def receive_loop(subscriber):
         write_queue.put((topic, timestamp_us, value))
 
 def main():
-    dbc = cantools.database.load_file(dbc_file_path)
+    dbc = cantools.database.load_file(DBC_FILE_PATH)
     units = {
         sig.name: sig.unit for msg in dbc.messages for sig in msg.signals if sig.unit
     }
@@ -54,7 +54,7 @@ def main():
         def shutdown(sig, frame):
             write_queue.put(None)
             t.join()
-            mdf4.save(dst=log_dir, overwrite=True)
+            mdf4.save(dst=LOG_DIR, overwrite=True)
             sys.exit(0)
 
         signal.signal(signal.SIGTERM, shutdown)
@@ -66,7 +66,7 @@ def main():
         with zmq.asyncio.Context() as ctx:
             with ctx.socket(zmq.SUB) as subscriber:
 
-                subscriber.connect(f"tcp://{broker_host}:5560")
+                subscriber.connect(f"tcp://{BROKER_HOST}:5560")
                 subscriber.setsockopt(zmq.SUBSCRIBE, b"")
                 asyncio.run(receive_loop(subscriber))
 
