@@ -1,5 +1,4 @@
 import asyncio
-import datetime
 import json
 import os
 import queue
@@ -8,7 +7,6 @@ import struct
 import sys
 import threading
 import time
-from pathlib import Path
 
 import cantools
 import zmq
@@ -16,8 +14,7 @@ from digi_xbee.devices import XBeeDevice
 from digi_xbee.exception import XBeeException
 from digi_xbee.models.address import XBee64BitAddress
 
-DBC_FILE_PATH = os.environ["DBC_PATH"]
-LOG_DIR = Path(os.environ["LOG_DIR"], datetime.now().strftime("%Y%m%d_%H%M%S.mf4"))
+DBC_FILE_PATH = os.environ["DBC_FILE_PATH"]
 BROKER_HOST = os.environ.get("BROKER_HOST", "broker")
 BROKER_PORT = int(os.environ.get("BROKER_PORT", "5560"))
 

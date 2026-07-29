@@ -26,7 +26,6 @@ services:
       - CRITICAL_CAN_INTERFACE=can0
       - NONCRITICAL_CAN_INTERFACE=can1
       - DBC_PATH=/app/dbc/CAN_2024.dbc
-
     restart: always
 
   broker:
@@ -41,9 +40,21 @@ services:
       dockerfile: sd-logger/Dockerfile
     depends_on: [broker]
     environment:
-      - LOG_DIR=/logs
+      - LOG_DIR=/telemetry_logs
       - DBC_PATH=/app/dbc/CAN_2024.dbc
+      - BROKER_PORT=5560
     volumes:
       - ./dbc:/app/dbc:ro
-      - /mnt/logs:/logs
+      - /mnt/telemetry_logs:/telemetry_logs
+    restart: always
+
+  rf-sender:
+    build:
+      context: .
+      dockerfile: rf-sender/Dockerfile
+    depends_on: [broker]
+    environment:
+      - DBC_FILE_PATH=/app/dbc-files/telemetry_can.dbc
+    volumes:
+      - ./dbc:/app/dbc:ro
     restart: always
