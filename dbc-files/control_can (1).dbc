@@ -1,4 +1,4 @@
-VERSION "MUR_Control_CAN_v1.0"
+VERSION "MUR_Control_CAN_v1.1"
 
 
 NS_ :
@@ -40,6 +40,7 @@ BO_ 256 Pedal_Status: 8 PEDALBOX
  SG_ PEDAL_Position2 : 10|10@1+ (0.1,0) [0|100] "%" ECU,TELEMETRY
  SG_ PEDAL_BrakePressure1 : 20|16@1+ (0.1,0) [0|2000] "psi" ECU,TELEMETRY
  SG_ PEDAL_BrakePressure2 : 36|16@1+ (0.1,0) [0|2000] "psi" ECU,TELEMETRY
+ SG_ PEDAL_StatusCounter : 56|8@1+ (1,0) [0|255] "" ECU,TELEMETRY
 
 BO_ 257 Pedal_Diagnostics: 8 PEDALBOX
  SG_ PEDAL_BSEStatus : 0|8@1+ (1,0) [0|255] "" ECU,TELEMETRY
@@ -61,7 +62,7 @@ BO_ 288 ECU_Control: 8 ECU
  SG_ ECU_TorqueRequest : 0|16@1- (0.1,0) [-3276.8|3276.7] "Nm" TELEMETRY
  SG_ ECU_TorqueLimit : 16|16@1+ (0.1,0) [0|6553.5] "Nm" TELEMETRY
  SG_ ECU_DriveMode : 32|8@1+ (1,0) [0|255] "" TELEMETRY
- SG_ ECU_HeartbeatCounter : 40|8@1+ (1,0) [0|255] "" TELEMETRY
+ SG_ ECU_ControlCounter : 40|8@1+ (1,0) [0|255] "" TELEMETRY
 
 BO_ 289 ECU_Cooling: 8 ECU
  SG_ ECU_RadiatorTempIn : 0|16@1- (0.1,0) [-3276.8|3276.7] "degC" TELEMETRY
@@ -72,7 +73,7 @@ BO_ 289 ECU_Cooling: 8 ECU
 BO_ 290 ECU_Status: 8 ECU
  SG_ ECU_FaultFlags : 0|32@1+ (1,0) [0|4294967295] "" TELEMETRY
  SG_ ECU_ECUState : 32|8@1+ (1,0) [0|255] "" TELEMETRY
- SG_ ECU_HeartbeatCounter : 40|8@1+ (1,0) [0|255] "" TELEMETRY
+ SG_ ECU_StatusCounter : 40|8@1+ (1,0) [0|255] "" TELEMETRY
 
 BO_ 320 Telemetry_Heartbeat: 8 TELEMETRY
  SG_ TELEM_NodeHealthBitfield : 0|16@1+ (1,0) [0|65535] "" ECU
@@ -83,29 +84,35 @@ BO_ 321 Watchdog_Status: 8 TELEMETRY
  SG_ TELEM_LostNodesBitfield : 0|16@1+ (1,0) [0|65535] "" ECU
  SG_ TELEM_TimeoutFlags : 16|16@1+ (1,0) [0|65535] "" ECU
  SG_ TELEM_SystemState : 32|8@1+ (1,0) [0|255] "" ECU
+ SG_ TELEM_WatchdogCounter : 40|8@1+ (1,0) [0|255] "" ECU
 
 CM_ BU_ PEDALBOX "Pedalbox Sensor Node";
 CM_ BU_ TTCS "Tractive System / Thermal / Cooling Sensor Node (SDC, IMD, HV cell temps)";
 CM_ BU_ ECU "Engine/Electronic Control Unit - VCU role, arbitrates torque and cooling";
 CM_ BU_ BMS "Battery Management System - CURRENTLY Orion BMS 2 (see vendor/Orion_BMS.dbc). CAN ID block 0x130-0x13F reserved for future ENNOID BMS - not yet implemented, no signals defined per design brief (no DBC/firmware exists yet). Orion BMS uses its own vendor-defined IDs (0x10,0x20,0x30,0x40,0x36,0x618) which do not fall in this block and must be loaded from vendor/Orion_BMS.dbc alongside this file.";
 CM_ BU_ TELEMETRY "Telemetry Unit (Raspberry Pi) - silently captures all Control CAN traffic, hosts watchdog";
-CM_ BO_ 256 "Pedalbox primary sensor group. Transmit rate 250 Hz (FAST). Bits 52-63 reserved for future expansion.";
+CM_ BO_ 256 "Pedalbox primary sensor group. Transmit rate 250 Hz (FAST). Bits 52-55 reserved for future expansion.";
+CM_ SG_ 256 PEDAL_StatusCounter "Rolling counter incremented every transmission. In-message so a frozen/stale pedal stream is detectable within one 4 ms cycle; the 10 Hz counter in Pedal_Diagnostics alone gives up to 100 ms detection latency.";
 CM_ BO_ 257 "Pedalbox diagnostics / BSE plausibility + heartbeat. Transmit rate 10 Hz.";
 CM_ SG_ 257 PEDAL_BSEStatus "Brake System Encoder / plausibility bitfield. Bit meanings TBD - to be defined with firmware team (placeholder byte reserved).";
 CM_ BO_ 272 "TTCS shutdown circuit + IMD state + heartbeat. Transmit rate 10 Hz.";
 CM_ SG_ 272 TTCS_SDCStatus1 "0 = circuit open/fault, 1 = circuit closed/OK (ASSUMPTION - confirm polarity with TTCS hardware team).";
 CM_ SG_ 272 TTCS_IMDState "IMD operating state per Bender IMD datasheet. ASSUMPTION placeholder - exact enum values TBD, see VAL_ table below for suggested starting point.";
 CM_ BO_ 273 "TTCS IMD voltage + up to 3 HV cell temperatures (only populated if Orion BMS 2 provides cell temp taps). Transmit rate 10 Hz (MEDIUM).";
+CM_ SG_ 273 TTCS_IMDVoltage "OPEN QUESTION - confirm semantics with TTCS team: is this the measured HV bus voltage in volts, or the IMD's insulation resistance measurement (Bender IMDs report kOhm)? Unit and scaling must match the answer.";
 CM_ BO_ 288 "ECU torque arbitration message, consumed internally by ECU/VCU logic before being translated into the Cascadia PM100DZ M192_Command_Message (vendor ID 0xC0) - these are NOT the same CAN message. Transmit rate 200 Hz (FAST) per design brief.";
 CM_ SG_ 288 ECU_TorqueRequest "Signed to allow negative (regen) torque requests per can_standard.md signedness rule.";
 CM_ SG_ 288 ECU_DriveMode "ASSUMPTION placeholder enum - exact drive mode set (Eco/Normal/Attack/etc.) TBD, see VAL_ table below.";
 CM_ BO_ 289 "ECU cooling loop temps/pressures, inlet and outlet. Transmit rate 20 Hz (MEDIUM).";
 CM_ BO_ 290 "ECU bitfield faults + state machine + heartbeat. Transmit rate 10 Hz, EVENT-driven on change permitted in addition.";
+CM_ SG_ 288 ECU_ControlCounter "Rolling counter for the ECU_Control stream. Renamed from ECU_HeartbeatCounter: signal names must be unique across the bus because the telemetry pipeline keys ZMQ topics on signal name alone - two messages sharing a signal name silently merge into one topic.";
+CM_ SG_ 290 ECU_StatusCounter "Rolling counter for the ECU_Status stream. Renamed from ECU_HeartbeatCounter - see ECU_ControlCounter note on bus-wide signal name uniqueness.";
 CM_ SG_ 290 ECU_FaultFlags "32-bit bitfield per design brief FaultFlags convention. Bit assignments TBD - to be defined with firmware team.";
 CM_ SG_ 290 ECU_ECUState "ASSUMPTION placeholder state machine enum - TBD, see VAL_ table below.";
 CM_ BO_ 320 "Telemetry Pi heartbeat + system health broadcast onto Control CAN. Transmit rate 10 Hz.";
 CM_ SG_ 320 TELEM_NodeHealthBitfield "One bit per monitored node (bit0=Pedalbox, bit1=TTCS, bit2=ECU, bit3=BMS) - ASSUMPTION bit order, confirm with telemetry firmware.";
-CM_ BO_ 321 "Watchdog / lost-node broadcast, transmitted only on state change (EVENT) per design brief.";
+CM_ BO_ 321 "Watchdog / lost-node broadcast. Cyclic 1 Hz backstop + immediate retransmit on state change (was pure EVENT: a single lost event frame meant the ECU never learned a node died; the cyclic copy bounds that to 1 s and lets receivers treat watchdog silence itself as a failure).";
+CM_ SG_ 321 TELEM_WatchdogCounter "Rolling counter incremented every transmission so receivers can detect a dead/frozen watchdog service, not just missed frames.";
 CM_ SG_ 321 TELEM_LostNodesBitfield "One bit per node considered lost (same bit order assumption as TELEM_NodeHealthBitfield).";
 CM_ SG_ 321 TELEM_SystemState "ASSUMPTION placeholder enum - see VAL_ table below.";
 
@@ -124,7 +131,7 @@ BA_ "GenMsgCycleTime" BO_ 288 5;
 BA_ "GenMsgCycleTime" BO_ 289 50;
 BA_ "GenMsgCycleTime" BO_ 290 100;
 BA_ "GenMsgCycleTime" BO_ 320 100;
-BA_ "GenMsgCycleTime" BO_ 321 0;
+BA_ "GenMsgCycleTime" BO_ 321 1000;
 BA_ "GenMsgSendType" BO_ 256 0;
 BA_ "GenMsgSendType" BO_ 257 0;
 BA_ "GenMsgSendType" BO_ 272 0;
@@ -133,7 +140,7 @@ BA_ "GenMsgSendType" BO_ 288 0;
 BA_ "GenMsgSendType" BO_ 289 0;
 BA_ "GenMsgSendType" BO_ 290 0;
 BA_ "GenMsgSendType" BO_ 320 0;
-BA_ "GenMsgSendType" BO_ 321 2;
+BA_ "GenMsgSendType" BO_ 321 0;
 
 VAL_ 272 TTCS_IMDState 0 "Normal" 1 "Undervoltage" 2 "Speed Start" 3 "Device Error" 4 "Earth Fault" 5 "Ground Fault Warning" 6 "SST Warning" 7 "SST Fault" 255 "Invalid/Init" ;
 VAL_ 288 ECU_DriveMode 0 "Off" 1 "Eco" 2 "Normal" 3 "Attack" 255 "Invalid/Init" ;

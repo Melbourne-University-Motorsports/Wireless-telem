@@ -1,4 +1,4 @@
-VERSION "MUR_Telemetry_CAN_v1.0"
+VERSION "MUR_Telemetry_CAN_v1.1"
 
 
 NS_ :
@@ -33,7 +33,7 @@ NS_ :
 
 BS_:
 
-BU_: DASH PDU SBG TELEMETRY
+BU_: DASH PDU SBG TELEMETRY ECU
 
 BO_ 512 Dashboard_Dynamics: 8 DASH
  SG_ DASH_SteeringAngle : 0|16@1- (0.1,0) [-1800|1800] "deg" TELEMETRY
@@ -67,6 +67,7 @@ CM_ BU_ DASH "Dashboard Sensor Node - steering, shock pots, driver buttons, wind
 CM_ BU_ PDU "Power Distribution Unit - pump/fan state, no command messages per design brief (commands originate from ECU if implemented)";
 CM_ BU_ SBG "2x SBG Eclipse-N GPS/INS units. Vendor-supplied DBC required - NOT included here. CAN ID block 0x220-0x22F reserved for SBG traffic (one unit must be remapped in SBG software since both units share this bus). No signals defined in this file to avoid misrepresenting the vendor protocol; merge the vendor SBG DBC (remapped copy) alongside this file once received.";
 CM_ BU_ TELEMETRY "Telemetry Unit (Raspberry Pi) - silently captures all Telemetry CAN traffic, also broadcasts system health + LV battery data";
+CM_ BU_ ECU "Engine/Electronic Control Unit - dual-homed node, also on Control CAN (see control_can DBC). Previously listed as a receiver of PDU_Status and Telemetry_LVBattery without being declared here. HARDWARE NOTE: requires a second CAN transceiver on the ECU - confirm before finalising.";
 CM_ BO_ 512 "Dashboard steering/suspension + heartbeat. Transmit rate 100 Hz (FAST).";
 CM_ SG_ 512 DASH_SteeringAngle "Signed to allow left/right steering deflection.";
 CM_ BO_ 513 "Dashboard driver button states + rotary mode switch. Transmit rate 20 Hz.";
