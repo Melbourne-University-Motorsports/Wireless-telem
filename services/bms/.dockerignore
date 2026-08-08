@@ -1,0 +1,36 @@
+# Git
+.git/
+.gitignore
+
+# Virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Logs
+logs/
+*.log
+*.jsonl
+
+# Docs / notes
+README.md
+note.md
+
+# Not needed in build context
+bluetoothcheck/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.env

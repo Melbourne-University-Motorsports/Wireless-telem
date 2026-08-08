@@ -7,14 +7,11 @@ requires-python = ">=3.13"
 dependencies = []
 
 [tool.uv.workspace]
-members = [
-    "can-reader",
-    "sd-logger",
-    "rf-sender",
-    "shared",
-    "broker",
-    "can-simulator",
-]
+members = ["services/broker",
+    "./services/can-reader",
+    "./services/can-simulator",
+    "./services/rf-sender",
+    "./services/sd-logger"]
 
 [dependency-groups]
 dev = [

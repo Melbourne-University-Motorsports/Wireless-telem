@@ -1,0 +1,20 @@
+services:
+  bms-telemetry:
+    build:
+      # when adding this as a service entry use context: ./bms_telemetry
+      context: .
+      target: production
+    restart: unless-stopped
+    ports:
+      - "5559:5559"
+    privileged: true # permission to access hardwares
+    volumes:
+      # network_mode: host would break docker dns
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket
+      # when adding this as a service entry use context: ./logs:/bms_telemetry/logs
+      - ./logs:/bms_telemetry/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      # Uncomment to enable debug outputs:
+      # - BMS_JSONL_LOG=true
+      # - BMS_VERBOSE=true

@@ -45,7 +45,7 @@ services:
       - BROKER_PORT=5560
     volumes:
       - ./dbc:/app/dbc:ro
-      - /mnt/telemetry_logs:/telemetry_logs
+      - ./mnt/telemetry_logs:/telemetry_logs
     restart: always
 
   rf-sender:

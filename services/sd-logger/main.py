@@ -14,7 +14,7 @@ import zmq.asyncio
 from asammdf import MDF, Signal
 
 DBC_FILE_PATH = os.environ["DBC_PATH"]
-LOG_DIR = Path(os.environ["LOG_DIR"], datetime.now().strftime("%Y%m%d_%H%M%S.mf4"))
+LOG_DIR = Path(os.environ["LOG_DIR"], datetime.datetime.now().strftime("%Y%m%d_%H%M%S.mf4"))
 BROKER_HOST = os.environ.get("BROKER_HOST", "broker")
 
 write_queue = queue.Queue()

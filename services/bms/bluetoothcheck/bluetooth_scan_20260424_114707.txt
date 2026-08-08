@@ -1,0 +1,536 @@
+Bluetooth Scan Results
+Time: 2026-04-24 11:47:18
+Scan Duration: 10 seconds
+============================================================
+
+Found 129 device(s):
+
+1. Bern detached balls
+   Address: E4B93206-9E19-3D84-7FCC-BCA88EE56C47
+   Signal:  -39 dBm
+
+2. (No Name)
+   Address: 5D7E108D-1755-DCAF-060A-22AD4F9F6611
+   Signal:  -41 dBm
+
+3. (No Name)
+   Address: E0FBCE5B-75AD-1C56-B59E-235E68F5E4F1
+   Signal:  -48 dBm
+
+4. fine shyt
+   Address: 9BE13DFA-39DA-0B9A-D67A-EC5CEAEB28C2
+   Signal:  -50 dBm
+
+5. (No Name)
+   Address: 4E18BD6E-A5E0-9D41-B24A-D8A8618380A2
+   Signal:  -58 dBm
+
+6. TONG EN’s iPhone
+   Address: 245DBE8B-4708-DE0E-64B0-E6B8B789D3C2
+   Signal:  -61 dBm
+
+7. Red-AL1220BT
+   Address: 4A4199D5-3DBC-07E5-D5F2-0E08887C960A
+   Signal:  -62 dBm
+   Services: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+
+8. (No Name)
+   Address: 32A9E7F6-C61B-F6E0-D76D-42FAA945D270
+   Signal:  -65 dBm
+
+9. (No Name)
+   Address: 42AFD5D9-F0FF-3A4F-1109-9497A366582D
+   Signal:  -68 dBm
+
+10. Blue-AL1220BT
+   Address: E347443D-D3EB-6CB5-553F-AE85CCB80552
+   Signal:  -69 dBm
+   Services: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+
+11. (No Name)
+   Address: D9026359-3F12-4A6F-DF26-B4A9D49B93E5
+   Signal:  -69 dBm
+
+12. LAPTOP-AMQ4QK8S
+   Address: AE94DEB8-39BE-C38A-7C14-D61AE15D9966
+   Signal:  -70 dBm
+   Services: ['0000180a-0000-1000-8000-00805f9b34fb', '61ce1c20-e8bc-4287-91fd-7cc25f0df500']
+
+13. (No Name)
+   Address: 2F02C1F2-869C-EBAD-6447-2135813F5BE5
+   Signal:  -71 dBm
+
+14. (No Name)
+   Address: B0CD22B8-9D2E-129A-B065-063459E70FA6
+   Signal:  -72 dBm
+
+15. (No Name)
+   Address: 06CBFFB1-9494-8D75-EF72-3560A9B0D886
+   Signal:  -73 dBm
+
+16. HD 450BT
+   Address: 105F6697-A1AB-7CC9-D850-C2CFA95516DF
+   Signal:  -73 dBm
+   Services: ['0000180f-0000-1000-8000-00805f9b34fb', '0000180a-0000-1000-8000-00805f9b34fb', '0000fdce-0000-1000-8000-00805f9b34fb']
+
+17. (No Name)
+   Address: A583A7F7-1826-4EDF-D3D8-42A086DB008A
+   Signal:  -76 dBm
+
+18. (No Name)
+   Address: E489E5F5-E69C-34DC-FD1C-7448A9D33166
+   Signal:  -77 dBm
+
+19. (No Name)
+   Address: 9DCCF4F6-CFE6-92AA-4E4C-8B412B1BAAE5
+   Signal:  -78 dBm
+
+20. (No Name)
+   Address: 7415961A-B447-8167-32F3-F3AF0013EF2B
+   Signal:  -78 dBm
+
+21. (No Name)
+   Address: B4B6E550-483C-8A43-4119-8C38AE928EFA
+   Signal:  -78 dBm
+
+22. (No Name)
+   Address: D4BE97E9-DE66-E30D-CABD-6A6CADAA54B7
+   Signal:  -79 dBm
+
+23. R-12-20211008-0430
+   Address: C29D1674-6ECF-4B25-EAC2-0BA371449E91
+   Signal:  -79 dBm
+   Services: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+
+24. (No Name)
+   Address: 19C219C1-3AC7-C78A-C09F-C1C7FC45FDFB
+   Signal:  -79 dBm
+
+25. (No Name)
+   Address: 32FC9679-F828-E6E3-D73F-F3170C581977
+   Signal:  -80 dBm
+
+26. (No Name)
+   Address: DDBCAF56-9A59-3288-B8C5-1D2DCDCD1677
+   Signal:  -80 dBm
+
+27. (No Name)
+   Address: 47C06520-107F-C8D1-9437-B92F855422CD
+   Signal:  -80 dBm
+
+28. (No Name)
+   Address: 902EC7E8-629B-F0BF-E5B2-1369606193A1
+   Signal:  -80 dBm
+
+29. (No Name)
+   Address: ABC400DD-3141-4700-37AB-5E2542C40549
+   Signal:  -80 dBm
+
+30. (No Name)
+   Address: EC632E2A-9A2E-4602-8437-FBD01A9CBACB
+   Signal:  -80 dBm
+
+31. (No Name)
+   Address: 7AE0CA8E-0276-BCF7-E001-B80BB66EDDBD
+   Signal:  -81 dBm
+
+32. (No Name)
+   Address: E96D43AE-46B1-6E35-9301-FD3462228695
+   Signal:  -81 dBm
+
+33. (No Name)
+   Address: AE55E608-3F20-0C53-EE6C-C9A62BA2B014
+   Signal:  -82 dBm
+
+34. (No Name)
+   Address: D7A6E8B5-8C95-7E00-C2E1-A13EFCA1128F
+   Signal:  -82 dBm
+
+35. (No Name)
+   Address: E4AC85C0-6549-27ED-9EFD-21971313329F
+   Signal:  -83 dBm
+
+36. (No Name)
+   Address: 860310BE-2B05-DD09-AD83-878656ADC583
+   Signal:  -83 dBm
+
+37. (No Name)
+   Address: 33A15D63-2C34-0972-E95D-69C956B21079
+   Signal:  -83 dBm
+
+38. (No Name)
+   Address: 6C23E4D4-E0B3-277B-BBAB-96843DC7FE76
+   Signal:  -83 dBm
+
+39. (No Name)
+   Address: 76773AF1-909E-86F1-4039-7042F39EBC87
+   Signal:  -84 dBm
+
+40. (No Name)
+   Address: 6A786DEF-ECA0-CB57-5817-7D43C0070C22
+   Signal:  -84 dBm
+
+41. (No Name)
+   Address: A91F07B4-0798-9586-2182-4124A7D1A2A1
+   Signal:  -84 dBm
+
+42. (No Name)
+   Address: 028A6E21-28D2-E384-942B-2C957059E8CC
+   Signal:  -84 dBm
+
+43. (No Name)
+   Address: FB2CFD68-2758-E542-E28C-7CE5DBE1191F
+   Signal:  -84 dBm
+
+44. (No Name)
+   Address: F9EAC1FF-059E-8A40-A3DE-5052C62626BE
+   Signal:  -84 dBm
+
+45. R-12-20211008-0470
+   Address: FB659D0F-9739-682C-3C54-E1C4535E0DA7
+   Signal:  -84 dBm
+   Services: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+
+46. (No Name)
+   Address: D29040A6-B6FF-6D88-3FAA-2CA78C9D9271
+   Signal:  -84 dBm
+
+47. (No Name)
+   Address: F5C944C6-0B6C-4801-8CE3-EE24F9761AF1
+   Signal:  -85 dBm
+
+48. (No Name)
+   Address: 2CE7E909-1E26-2B0A-2F93-D63E3EF7BC9F
+   Signal:  -85 dBm
+
+49. R-12-20211008-0600
+   Address: 4EE2F1E3-825D-AAB5-1B22-5BD617FAC96A
+   Signal:  -86 dBm
+   Services: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+
+50. (No Name)
+   Address: 159859F2-A904-0344-E091-E4CCCA727BC4
+   Signal:  -86 dBm
+
+51. (No Name)
+   Address: 129428F4-9AEA-B4C5-2A65-6D1D9FC6B703
+   Signal:  -86 dBm
+
+52. (No Name)
+   Address: 163B6331-16CF-2420-430D-4639CEF445DA
+   Signal:  -87 dBm
+
+53. (No Name)
+   Address: 91BDE660-2BEE-F47C-ED15-9893F775FBCB
+   Signal:  -87 dBm
+
+54. (No Name)
+   Address: A5BAD721-D90E-2D20-0843-DE1030C9E9C7
+   Signal:  -88 dBm
+
+55. (No Name)
+   Address: C31B5B71-3E7D-7B93-C034-17D4B4D41601
+   Signal:  -88 dBm
+
+56. (No Name)
+   Address: B87AF8F1-3A63-42A7-4A6A-8558091BA8A5
+   Signal:  -88 dBm
+
+57. (No Name)
+   Address: 90E265CA-FF32-8258-1F80-FF120725BC0E
+   Signal:  -88 dBm
+
+58. (No Name)
+   Address: 3694092F-2B9D-4D5D-FC44-8930C069D9C2
+   Signal:  -88 dBm
+
+59. (No Name)
+   Address: C55F53C3-F134-E109-9692-A43C3F229FAD
+   Signal:  -89 dBm
+
+60. (No Name)
+   Address: 46D2C5C3-BA09-C5C5-D807-D7383BC64715
+   Signal:  -89 dBm
+
+61. (No Name)
+   Address: F27F147F-0638-A13E-32CD-FBA408D988FF
+   Signal:  -89 dBm
+
+62. (No Name)
+   Address: 813A3D65-53EC-072C-BC36-056E315BBC0A
+   Signal:  -89 dBm
+
+63. (No Name)
+   Address: A11B6B19-6A76-3B59-C9F8-AC5946CCC909
+   Signal:  -90 dBm
+
+64. R-12-20211008-0429
+   Address: 09A94E2F-8A39-C4E5-5116-C63B9D367B0D
+   Signal:  -90 dBm
+   Services: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+
+65. (No Name)
+   Address: 49B7BE70-F77E-1575-67E1-CD0ABFFD0AF4
+   Signal:  -90 dBm
+
+66. (No Name)
+   Address: F383BBB6-C3DE-5C5E-6DD2-5C404F5831F1
+   Signal:  -90 dBm
+
+67. (No Name)
+   Address: 49FC5AA8-E783-3444-0713-5C03B91415B5
+   Signal:  -90 dBm
+
+68. (No Name)
+   Address: 37991F71-E44A-C8AF-4DA7-83D85775B651
+   Signal:  -90 dBm
+
+69. (No Name)
+   Address: A5AC19DF-CCE0-2349-13D2-F3721569AC5D
+   Signal:  -91 dBm
+
+70. (No Name)
+   Address: 25CBDA64-F48B-8D85-C6E7-0F59EA2D8803
+   Signal:  -91 dBm
+
+71. (No Name)
+   Address: 642DDE88-0FED-8E61-B497-943178B0F320
+   Signal:  -91 dBm
+
+72. (No Name)
+   Address: 933469B9-FC0A-9FC6-9329-3483B627981B
+   Signal:  -91 dBm
+
+73. (No Name)
+   Address: E5683C7B-2ED4-73B6-23F8-176C2D1B0A5D
+   Signal:  -91 dBm
+
+74. (No Name)
+   Address: 9C437A4D-BC19-92DB-C61F-B6198A325F82
+   Signal:  -91 dBm
+
+75. (No Name)
+   Address: 8F3AD915-18A0-2516-EDB6-041BB7528A13
+   Signal:  -91 dBm
+
+76. (No Name)
+   Address: 5CC84A9F-B127-9781-7150-99F6F651C9BF
+   Signal:  -92 dBm
+
+77. (No Name)
+   Address: 48B12AEE-EA5D-59C1-5BFF-7B4706B3A23C
+   Signal:  -92 dBm
+   Services: ['0000180a-0000-1000-8000-00805f9b34fb', '61ce1c20-e8bc-4287-91fd-7cc25f0df500']
+
+78. (No Name)
+   Address: 8730B054-CA22-59AD-3945-7DD4918A49AE
+   Signal:  -92 dBm
+
+79. (No Name)
+   Address: 1BF3ABD0-536C-0D29-C756-DC676FED1516
+   Signal:  -92 dBm
+
+80. (No Name)
+   Address: 65CE621B-2589-EE59-C6FB-5CC7554B0379
+   Signal:  -92 dBm
+   Services: ['0000180a-0000-1000-8000-00805f9b34fb', '61ce1c20-e8bc-4287-91fd-7cc25f0df500']
+
+81. (No Name)
+   Address: A2F56FDC-A2F2-6746-32DB-265AD92089C0
+   Signal:  -92 dBm
+
+82. (No Name)
+   Address: BC006094-7584-425E-C8DE-852DBF387DFD
+   Signal:  -92 dBm
+
+83. M24Batt1
+   Address: BCFCB71A-19BB-AD43-67C6-86DBF95E1D2E
+   Signal:  -92 dBm
+   Services: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+
+84. (No Name)
+   Address: 2C725C4C-6506-D33B-FF9C-3F4C834D9E7E
+   Signal:  -92 dBm
+
+85. (No Name)
+   Address: FA89E61E-5D06-E3BC-1913-33AE1304364F
+   Signal:  -92 dBm
+
+86. (No Name)
+   Address: EA584B87-4926-908C-6086-46A1F057D44B
+   Signal:  -92 dBm
+
+87. (No Name)
+   Address: 0405E23D-348E-B122-BCCC-14862D4CEDB6
+   Signal:  -93 dBm
+
+88. (No Name)
+   Address: DD28D589-AE83-793F-A3E6-9A630B4651F3
+   Signal:  -93 dBm
+
+89. (No Name)
+   Address: E47EE5A9-4E1C-09F1-6D0B-BD4E5D8891E9
+   Signal:  -93 dBm
+
+90. (No Name)
+   Address: D607F8DA-8720-6F7C-431D-BA82813F03C6
+   Signal:  -93 dBm
+
+91. (No Name)
+   Address: 972EC061-26DF-2677-3126-B85843EDAFD4
+   Signal:  -93 dBm
+
+92. (No Name)
+   Address: 9FA55938-5E42-C8A7-3269-29C1D36F704F
+   Signal:  -93 dBm
+
+93. (No Name)
+   Address: 6F764FF4-3EDB-B285-2802-EF322C35C45D
+   Signal:  -94 dBm
+
+94. (No Name)
+   Address: 7BAED885-05A0-3FC7-1A18-065E7ACAFEA9
+   Signal:  -94 dBm
+
+95. (No Name)
+   Address: A063625E-BDB9-DC02-0ACF-83B1C494976F
+   Signal:  -94 dBm
+
+96. (No Name)
+   Address: 5613FFEE-5361-0DC1-E467-F87179DE5AD8
+   Signal:  -94 dBm
+
+97. (No Name)
+   Address: 5A14F036-60D0-957C-482F-D55CBEEE9CEA
+   Signal:  -94 dBm
+
+98. (No Name)
+   Address: BCB7CA2A-17C9-4EC7-1308-EFEFFFCE641E
+   Signal:  -94 dBm
+
+99. (No Name)
+   Address: 142CD4DD-2F82-F090-FECF-0FC496821ADF
+   Signal:  -94 dBm
+
+100. (No Name)
+   Address: A27E1141-9A40-9F4A-D031-162B982548E3
+   Signal:  -95 dBm
+
+101. (No Name)
+   Address: DB2526E7-0121-90A6-E3F1-F9792489C824
+   Signal:  -95 dBm
+
+102. (No Name)
+   Address: 6F08E05E-6B3F-A07F-D142-5D68D650D490
+   Signal:  -95 dBm
+
+103. (No Name)
+   Address: 84866C84-A13F-8AC0-C591-987CEA47CA7D
+   Signal:  -95 dBm
+
+104. (No Name)
+   Address: 38067CEE-AA5F-5AA5-6CE9-264817C94F85
+   Signal:  -95 dBm
+
+105. (No Name)
+   Address: 4C25DAEE-ACD6-C75E-CC4F-90512E536CFF
+   Signal:  -95 dBm
+
+106. (No Name)
+   Address: 7C13CF04-A8F6-FFFA-D608-903D856003EE
+   Signal:  -95 dBm
+
+107. (No Name)
+   Address: CC3452B7-91B3-D7D0-BCDC-228F6A8979E2
+   Signal:  -96 dBm
+
+108. (No Name)
+   Address: E8690024-1C47-1368-43B8-1E9297DFF154
+   Signal:  -96 dBm
+
+109. (No Name)
+   Address: E7690FA2-7E50-08AC-5400-EC46B7C34423
+   Signal:  -96 dBm
+
+110. (No Name)
+   Address: A58FB2A0-2975-1925-6693-02EEC6D536C6
+   Signal:  -96 dBm
+
+111. (No Name)
+   Address: 0D42D561-B792-9929-4B6D-191E7A183AE8
+   Signal:  -96 dBm
+
+112. LE-Philips TAT3509
+   Address: CBD4DB0C-E97A-D6CA-769A-3EB5A0F12798
+   Signal:  -96 dBm
+
+113. (No Name)
+   Address: 8B1A7FCF-A442-E0B6-751B-AB420A283941
+   Signal:  -96 dBm
+
+114. (No Name)
+   Address: 7A3BBCCC-FA1F-C167-B7FD-E01CB3DF5A12
+   Signal:  -96 dBm
+   Services: ['0000180a-0000-1000-8000-00805f9b34fb', '61ce1c20-e8bc-4287-91fd-7cc25f0df500']
+
+115. (No Name)
+   Address: 1C06BE07-C8F0-E7A9-A92E-C196F36FC545
+   Signal:  -96 dBm
+
+116. (No Name)
+   Address: BCB3A05B-CB6D-E204-455E-624686598888
+   Signal:  -97 dBm
+   Services: ['daf56201-0000-1000-8000-00805f9b34fb']
+
+117. (No Name)
+   Address: E78D8871-2E26-B1F8-83F2-8A101B8F4157
+   Signal:  -97 dBm
+
+118. (No Name)
+   Address: F3951ABB-B192-6C2B-44E1-E92CB6281551
+   Signal:  -97 dBm
+
+119. (No Name)
+   Address: 791059E6-89D6-E5CE-536E-FFD3AC3D1CCA
+   Signal:  -97 dBm
+
+120. (No Name)
+   Address: E411C526-D2C7-4DCE-6CF0-DAD626F13F10
+   Signal:  -97 dBm
+
+121. (No Name)
+   Address: BA2E1F25-DD81-4BE3-642D-3ADA5ED901A6
+   Signal:  -97 dBm
+
+122. (No Name)
+   Address: 2B2BC230-2CC3-204C-2BC6-E52672DE31C3
+   Signal:  -97 dBm
+
+123. (No Name)
+   Address: 17B61206-F7FB-9C01-97AC-E0B7D44EA8BC
+   Signal:  -98 dBm
+
+124. (No Name)
+   Address: E29E178E-19C0-107E-D242-4CF187013EE5
+   Signal:  -98 dBm
+
+125. (No Name)
+   Address: E9807EC6-F1C5-497C-FC63-D3CA9D844815
+   Signal:  -98 dBm
+
+126. (No Name)
+   Address: 12DF30F0-1A4D-C197-3C23-72FA05E671B5
+   Signal:  -99 dBm
+
+127. (No Name)
+   Address: F26B5151-B3D2-F971-01EB-30C6F4CCBAE2
+   Signal:  -99 dBm
+
+128. (No Name)
+   Address: 17986A18-AF83-D648-8C0F-388C2241D71D
+   Signal:  -99 dBm
+
+129. (No Name)
+   Address: CFE762C3-977C-6392-511D-71F94667FF9C
+   Signal:  -99 dBm
+
