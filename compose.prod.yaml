@@ -1,5 +1,0 @@
-services:
-  can-reader:
-    devices:
-      - /dev/can0:/dev/can0
-      - /dev/can1:/dev/can1

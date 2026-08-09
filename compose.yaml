@@ -12,7 +12,9 @@ services:
       - CRITICAL_CAN_INTERFACE=can0
       - NONCRITICAL_CAN_INTERFACE=can1
       - DBC_PATH=/app/dbc/CAN_2024.dbc
+    network_mode: "host"
     restart: always
+
 
   can-simulator:
     build:
@@ -54,7 +56,7 @@ services:
       dockerfile: services/rf-sender/Dockerfile
     depends_on: [broker]
     environment:
-      - DBC_FILE_PATH=/app/dbc-files/telemetry_can.dbc
+      - DBC_FILE_PATH=/app/dbc/telemetry_can.dbc
     volumes:
       - ./dbc:/app/dbc:ro
     restart: always

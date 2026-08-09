@@ -1,0 +1,1 @@
+writes to log file and safely closes on interrupt.

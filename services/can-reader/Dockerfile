@@ -6,5 +6,5 @@ COPY services/can-reader/pyproject.toml ./services/can-reader/
 RUN uv sync --frozen --no-dev --package can-reader
 COPY services/can-reader/main.py ./services/can-reader/main.py
 ENV PATH="/app/.venv/bin:$PATH"
-CMD ["python", "main.py"]
+CMD ["python", "services/can-reader/main.py"]
 

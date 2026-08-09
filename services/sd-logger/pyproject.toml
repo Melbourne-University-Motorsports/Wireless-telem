@@ -3,7 +3,7 @@ name = "sd-logger"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12,<3.13"
 dependencies = [
     "asammdf>=8.8.9",
     "cantools>=41.3.1",

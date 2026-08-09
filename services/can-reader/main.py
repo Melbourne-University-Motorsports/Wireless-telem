@@ -18,7 +18,7 @@ async def process_bus(
     reader: can.AsyncBufferedReader,
     topic_prefix: str,
     publisher: zmq.asyncio.Socket,
-    dbc: cantools.db.Database,
+    dbc: cantools.database.Database,
 ) -> None:
     async for msg in reader:
         try:

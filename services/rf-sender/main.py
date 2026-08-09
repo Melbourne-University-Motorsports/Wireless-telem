@@ -10,9 +10,10 @@ import time
 
 import cantools
 import zmq
-from digi_xbee.devices import XBeeDevice
-from digi_xbee.exception import XBeeException
-from digi_xbee.models.address import XBee64BitAddress
+from zmq.asyncio import Context, Socket
+from digi.xbee.devices import XBeeDevice
+from digi.xbee.exception import XBeeException
+from digi.xbee.models.address import XBee64BitAddress
 
 DBC_FILE_PATH = os.environ["DBC_FILE_PATH"]
 BROKER_HOST = os.environ.get("BROKER_HOST", "broker")
@@ -101,7 +102,7 @@ def xbee_sender_thread(device: XBeeDevice, dest_addr: XBee64BitAddress, id_to_na
                 flush()
 
 
-async def receive_loop(subscriber: zmq.asynio.Socket, name_to_id: dict):
+async def receive_loop(subscriber: Socket, name_to_id: dict):
     while True:
         topic, timestamp_us, value = await subscriber.recv_multipart()
         signal_name = topic.decode().split(".")[-1]
@@ -137,7 +138,7 @@ def main():
     t = threading.Thread(target=xbee_sender_thread, args=(device, dest_addr, id_to_name, units), daemon=True,)
     t.start()
 
-    with zmq.asyncio.Context() as ctx:
+    with Context() as ctx:
         with ctx.socket(zmq.SUB) as subscriber:
             subscriber.connect(f"tcp://{BROKER_HOST}:{BROKER_PORT}")
             subscriber.setsockopt(zmq.SUBSCRIBE, b"")

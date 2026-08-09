@@ -6,4 +6,4 @@ COPY services/broker/pyproject.toml ./services/broker/
 RUN uv sync --frozen --no-dev --package broker
 COPY services/broker/main.py ./services/broker/main.py
 ENV PATH="/app/.venv/bin:$PATH"
-CMD ["python", "main.py"]
+CMD ["python", "services/broker/main.py"]
