@@ -3,7 +3,7 @@ services:
   can-reader:
     build:
       context: .
-      dockerfile: can-reader/Dockerfile
+      dockerfile: services/can-reader/Dockerfile
     depends_on: [broker]
     devices: []
     volumes:
@@ -17,7 +17,7 @@ services:
   can-simulator:
     build:
       context: .
-      dockerfile: can-simulator/Dockerfile
+      dockerfile: services/can-simulator/Dockerfile
     profiles: [dev]
     depends_on: [broker]
     volumes:
@@ -31,13 +31,13 @@ services:
   broker:
     build:
       context: .
-      dockerfile: broker/Dockerfile
+      dockerfile: services/broker/Dockerfile
     restart: always
 
   sd-logger:
     build:
       context: .
-      dockerfile: sd-logger/Dockerfile
+      dockerfile: services/sd-logger/Dockerfile
     depends_on: [broker]
     environment:
       - LOG_DIR=/telemetry_logs
@@ -51,7 +51,7 @@ services:
   rf-sender:
     build:
       context: .
-      dockerfile: rf-sender/Dockerfile
+      dockerfile: services/rf-sender/Dockerfile
     depends_on: [broker]
     environment:
       - DBC_FILE_PATH=/app/dbc-files/telemetry_can.dbc
